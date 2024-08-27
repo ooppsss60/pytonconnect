@@ -64,7 +64,7 @@ class BridgeGateway:
         if not resolve.done():
             resolve.set_result(False)
 
-    async def register_session(self, timeout=5) -> bool:
+    async def register_session(self, timeout=300) -> bool:
         if self._is_closed:
             return False
 
