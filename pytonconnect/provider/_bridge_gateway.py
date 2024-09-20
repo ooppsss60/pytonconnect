@@ -54,6 +54,9 @@ class BridgeGateway:
         except asyncio.exceptions.CancelledError:
             pass
 
+        except httpx_sse._exceptions.SSEError as e:
+            _LOGGER.error(f'Bridge error -> {e}')
+
         except Exception:
             _LOGGER.exception('Bridge error -> Exception')
             if self._event_source.response.is_closed:
