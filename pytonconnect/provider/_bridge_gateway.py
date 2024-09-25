@@ -3,6 +3,7 @@ import json
 
 from httpx import AsyncClient as ClientSession
 from httpx_sse import EventSource, ServerSentEvent, aconnect_sse
+from httpx_sse._exceptions import SSEError
 
 from pytonconnect.exceptions import TonConnectError
 from pytonconnect.logger import _LOGGER
@@ -54,7 +55,7 @@ class BridgeGateway:
         except asyncio.exceptions.CancelledError:
             pass
 
-        except httpx_sse._exceptions.SSEError as e:
+        except SSEError as e:
             _LOGGER.error(f'Bridge error -> {e}')
 
         except Exception:
